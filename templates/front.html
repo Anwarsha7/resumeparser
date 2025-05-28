@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Parser Pro | Get Started</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+        
+        :root {
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --card-bg: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, 
+                          #0f2027 0%, 
+                          #203a43 50%, 
+                          #2c5364 100%);
+            margin: 0;
+            padding: 20px;
+            color: var(--dark);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(0);
+            transition: var(--transition);
+            animation: fadeIn 0.8s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #5a5a5a;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .slider-container {
+            display: flex;
+            justify-content: space-between;
+            background: #e9ecef;
+            border-radius: 30px;
+            padding: 6px;
+            cursor: pointer;
+            margin: 25px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .slider-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-light), var(--primary));
+            border-radius: 30px;
+            z-index: 0;
+            transition: var(--transition);
+        }
+        
+        .slider-container.admin-active::before {
+            transform: translateX(100%);
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+        }
+        
+        .slider-container div {
+            flex: 1;
+            padding: 14px;
+            text-align: center;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+            color: #555;
+        }
+        
+        .selected {
+            color: white !important;
+        }
+        
+        button {
+            margin-top: 25px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        button:hover {
+            background: linear-gradient(90deg, var(--primary-light), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                          transparent, 
+                          rgba(255,255,255,0.2), 
+                          transparent);
+            transition: 0.5s;
+        }
+        
+        button:hover::after {
+            left: 100%;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(67, 97, 238, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Resume Parser Pro</h2>
+        <p class="subtitle">Smart parsing technology for recruiters and job seekers</p>
+        
+        <div class="slider-container" id="slider">
+            <div id="user" class="selected" onclick="selectRole('user')">Candidate</div>
+            <div id="admin" onclick="selectRole('admin')">Recruiter</div>
+        </div>
+        
+        <button onclick="continueToPage()" class="pulse">Get Started →</button>
+    </div>
+
+    <script>
+        let selectedRole = 'user'; // Default role
+
+        function selectRole(role) {
+            selectedRole = role;
+            localStorage.setItem('selectedRole', role);
+            
+            // Update UI
+            document.getElementById('user').classList.remove('selected');
+            document.getElementById('admin').classList.remove('selected');
+            document.getElementById(role).classList.add('selected');
+            
+            // Update slider animation
+            const slider = document.getElementById('slider');
+            if (role === 'admin') {
+                slider.classList.add('admin-active');
+            } else {
+                slider.classList.remove('admin-active');
+            }
+        }
+
+        function continueToPage() {
+            // Add click animation
+            const btn = event.currentTarget;
+            btn.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                btn.style.transform = '';
+            }, 150);
+            
+            // Check role and redirect
+            setTimeout(() => {
+                let storedRole = localStorage.getItem('selectedRole') || selectedRole;
+                
+                if (storedRole === 'user') {
+                    window.location.href = "/userlogin";
+                } else if (storedRole === 'admin') {
+                    window.location.href = "/adminlogin";
+                }
+            }, 200);
+        }
+        
+        // Initialize slider position based on stored role
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedRole = localStorage.getItem('selectedRole');
+            if (storedRole === 'admin') {
+                selectRole('admin');
+            }
+        });
+    </script>
+</body>
+</html>

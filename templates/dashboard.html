@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9ff;
+            --success-color: #4cc9f0;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+            padding: 20px;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline-primary {
+            color: white;
+            border-color: white;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+        }
+        
+        h1 {
+            color: var(--dark-color);
+            font-weight: 800;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--success-color));
+            border-radius: 2px;
+        }
+        
+        .resume-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8faff 100%);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .resume-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-color), var(--success-color));
+        }
+        
+        .resume-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(67, 97, 238, 0.15);
+        }
+        
+        .resume-card h5 {
+            color: var(--dark-color);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .resume-card p {
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        .resume-card strong {
+            color: var(--secondary-color);
+        }
+        
+        .btn-upload {
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn {
+            margin-right: 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border-radius: 8px;
+            padding: 8px 20px;
+        }
+        
+        /* Download button animation */
+        .btn-success {
+            background-color: var(--success-color);
+            border-color: var(--success-color);
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+        
+        .btn-success:hover {
+            background-color: #3aa8d8;
+            transform: translateY(-2px);
+        }
+        
+        .btn-success:after {
+            content: "\f019";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            right: -20px;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-success:hover:after {
+            right: 15px;
+            opacity: 1;
+        }
+        
+        .btn-success:hover span {
+            transform: translateX(-8px);
+        }
+        
+        .btn-success span {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Delete button animation */
+        .btn-danger {
+            background-color: #f72585;
+            border-color: #f72585;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-danger:hover {
+            background-color: #e5177b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(247, 37, 133, 0.3);
+        }
+        
+        .alert-info {
+            background-color: #d6f3ff;
+            border-color: #b8e9ff;
+            color: #00668c;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a56d5;
+            border-color: #3a56d5;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-file-alt"></i>SnapParse
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-outline-primary" href="/logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <h1 class="text-center mb-4">
+            <i class="fas fa-tachometer-alt me-2"></i>Admin Dashboard
+        </h1>
+
+        <!-- Resumes List -->
+        <div class="resumes-list">
+            {% if resumes %}
+                {% for resume in resumes %}
+                    <div class="resume-card">
+                        <h5><i class="fas fa-user-circle me-2"></i>{{ resume.name }}</h5>
+                        <p><strong><i class="fas fa-envelope me-2"></i>Email:</strong> {{ resume.email }}</p>
+                        <p><strong><i class="fas fa-calendar-alt me-2"></i>Uploaded At:</strong> {{ resume.uploaded_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                        <a href="{{ url_for('download_resume', filename=resume.filename) }}" class="btn btn-success">
+                            <span><i class="fas fa-download me-1"></i>Download Resume</span>
+                        </a>
+                        <form action="{{ url_for('delete_resume', resume_id=resume._id) }}" method="POST" style="display: inline;">
+                            <input type="hidden" name="referrer" value="{{ request.url }}">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this resume?')">
+                                <i class="fas fa-trash-alt me-1"></i>Delete
+                            </button>
+                        </form>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-info" role="alert">
+                    <i class="fas fa-info-circle me-2"></i>No resumes uploaded by users.
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Go to Upload Button -->
+        <div class="text-center mt-4">
+            <a href="{{ url_for('parsed_resumes') }}" class="btn btn-primary btn-lg btn-upload">
+                <i class="fas fa-arrow-circle-right me-2"></i>Go to Index
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

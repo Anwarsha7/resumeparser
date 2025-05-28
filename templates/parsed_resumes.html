@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parsed Resumes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9ff;
+            --success-color: #4cc9f0;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+            padding: 20px;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1200px;
+        }
+        
+        h1 {
+            color: var(--dark-color);
+            font-weight: 800;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--success-color));
+            border-radius: 2px;
+        }
+        
+        .upload-card, .filter-section {
+            background: linear-gradient(145deg, #ffffff 0%, #f8faff 100%);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: none;
+        }
+        
+        .table {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .table td {
+            vertical-align: middle;
+        }
+        
+        .table tr:hover {
+            background-color: rgba(72, 149, 239, 0.05);
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+            border-color: var(--success-color);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-success:hover {
+            background-color: #3aa8d8;
+            transform: translateY(-2px);
+        }
+        
+        .btn-danger {
+            background-color: #f72585;
+            border-color: #f72585;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-danger:hover {
+            background-color: #e5177b;
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a56d5;
+            transform: translateY(-2px);
+        }
+        
+        .alert-info {
+            background-color: #d6f3ff;
+            border-color: #b8e9ff;
+            color: #00668c;
+        }
+        
+        .pagination .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .pagination .page-link {
+            color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .table-responsive {
+                overflow-x: auto;
+                display: block;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-file-alt me-2"></i>SnapParse
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('dashboard') }}">
+                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">
+                            <i class="fas fa-sign-out-alt me-1"></i>Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Upload Form Section -->
+        <div class="upload-card">
+            <h2 class="text-center mb-4">
+                <i class="fas fa-cloud-upload-alt me-2"></i>Upload New Resumes
+            </h2>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="resume" class="form-label">Select Resumes</label>
+                    <input type="file" class="form-control" name="resume" id="resume" accept=".pdf,.docx" multiple required>
+                </div>
+                <button type="button" id="uploadButton" class="btn btn-primary w-100">
+                    <span id="uploadButtonText">
+                        <i class="fas fa-upload me-1"></i>Upload
+                    </span>
+                </button>
+                <div class="progress mt-3" id="progressBar" style="display: none;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                </div>
+                <div id="uploadMessage"></div>
+            </form>
+        </div>
+
+        <!-- Page Header -->
+        <h1 class="text-center mb-4">
+            <i class="fas fa-file-alt me-2"></i>Parsed Resumes
+        </h1>
+
+        <!-- Filter Section -->
+        <!-- Previous code remains the same until the filter section -->
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <h4><i class="fas fa-filter me-2"></i>Filter Resumes</h4>
+            <form action="{{ url_for('filter') }}" method="GET" class="row g-3">
+                <div class="col-md-3">
+                    <label for="skills" class="form-label">Skills</label>
+                    <input type="text" class="form-control" id="skills" name="skills" placeholder="e.g., Python" value="{{ request.args.get('skills', '') }}">
+                </div>
+                <div class="col-md-3">
+                    <label for="education" class="form-label">Education</label>
+                    <input type="text" class="form-control" id="education" name="education" placeholder="e.g., Bachelor" value="{{ request.args.get('education', '') }}">
+                </div>
+                <div class="col-md-3">
+                    <label for="min_experience" class="form-label">Min Experience (Years)</label>
+                    <input type="number" class="form-control" id="min_experience" name="min_experience" placeholder="e.g., 5" value="{{ request.args.get('min_experience', '') }}">
+                </div>
+                <div class="col-md-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" class="form-control" id="location" name="location" placeholder="e.g., New York" value="{{ request.args.get('location', '') }}">
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check me-1"></i>Apply Filters
+                    </button>
+                    <a href="{{ url_for('parsed_resumes') }}" class="btn btn-secondary">
+                        <i class="fas fa-times me-1"></i>Clear Filters
+                    </a>
+                </div>
+            </form>
+        </div>
+
+<!-- Rest of the code remains the same -->
+
+        <!-- Sorting Options -->
+        <div class="filter-section">
+            <h4>Sort Resumes</h4>
+            <div class="btn-group" role="group">
+                <a href="{{ url_for('sort', sort_by='experience') }}" class="btn btn-outline-primary">By Experience</a>
+                <a href="{{ url_for('sort', sort_by='education') }}" class="btn btn-outline-primary">By Education</a>
+                <a href="{{ url_for('sort', sort_by='relevance') }}" class="btn btn-outline-primary">By Relevance</a>
+            </div>
+        </div>
+
+        <!-- Bulk Actions -->
+        <div class="filter-section mb-4">
+            <h4><i class="fas fa-tasks me-2"></i>Bulk Actions</h4>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="selectAllCheckbox">
+                    <label class="form-check-label" for="selectAllCheckbox">
+                        Select All
+                    </label>
+                </div>
+                <div>
+                    <button class="btn btn-danger me-2" id="deleteSelectedBtn">
+                        <i class="fas fa-trash-alt me-1"></i> Delete Selected
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resumes List -->
+        <div class="resumes-list">
+            {% if not resumes and (request.args.get('skills') or request.args.get('education') or request.args.get('experience') or request.args.get('location')) %}
+                <div class="alert alert-warning" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>No resumes match your filters. Try adjusting your criteria.
+                </div>
+            {% elif not resumes %}
+                <div class="alert alert-info" role="alert">
+                    <i class="fas fa-info-circle me-2"></i>No parsed resumes found.
+                </div>
+            {% else %}
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Experience</th>
+                                <th>Location</th>
+                                <th>Skills</th>
+                                <th>Education</th>
+                                <th>Certifications</th>
+                                <th>Uploaded At</th>
+                                <th>Parsed At</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for resume in resumes %}
+                            <tr>
+                                <td>
+                                    <input class="form-check-input resume-checkbox" type="checkbox" value="{{ resume._id }}" id="select-{{ resume._id }}">
+                                </td>
+                                <td>{{ resume.name }}</td>
+                                <td>{{ resume.email }}</td>
+                                <td>{{ resume.phone }}</td>
+                                <td>{{ resume.experience }} years</td>
+                                <td>{{ resume.location }}</td>
+                                <td>
+                                    {% if resume.skills %}
+                                    <ul class="list-unstyled">
+                                        {% for skill in resume.skills %}
+                                        <li><i class="fas fa-check-circle text-success me-1"></i>{{ skill }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% else %}
+                                    N/A
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if resume.education %}
+                                    <ul class="list-unstyled">
+                                        {% for edu in resume.education %}
+                                        <li><i class="fas fa-graduation-cap text-primary me-1"></i>{{ edu }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% else %}
+                                    N/A
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if resume.certifications %}
+                                    <ul class="list-unstyled">
+                                        {% for cert in resume.certifications %}
+                                        <li><i class="fas fa-certificate text-warning me-1"></i>{{ cert }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% else %}
+                                    N/A
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if resume.uploaded_at %}
+                                        {% if resume.uploaded_at is string %}
+                                            {{ resume.uploaded_at }}
+                                        {% else %}
+                                            {{ resume.uploaded_at.strftime('%Y-%m-%d %H:%M:%S') }}
+                                        {% endif %}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if resume.parsed_at %}
+                                        {% if resume.parsed_at is string %}
+                                            {{ resume.parsed_at }}
+                                        {% else %}
+                                            {{ resume.parsed_at.strftime('%Y-%m-%d %H:%M:%S') }}
+                                        {% endif %}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-column">
+                                        <a href="{{ url_for('download_resume', filename=resume.filename) }}" class="btn btn-success btn-sm mb-2">
+                                            <i class="fas fa-download me-1"></i> Download
+                                        </a>
+                                        <form action="{{ url_for('delete_resume', resume_id=resume._id) }}" method="POST">
+                                            <input type="hidden" name="referrer" value="{{ request.url }}">
+                                            <button type="submit" class="btn btn-danger btn-sm w-100" onclick="return confirm('Are you sure you want to delete {{ resume.name|escape }}\'s resume?')">
+                                                <i class="fas fa-trash-alt me-1"></i> Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Upload functionality
+        document.getElementById('uploadButton').addEventListener('click', function () {
+            const button = this;
+            const buttonText = document.getElementById('uploadButtonText');
+            const fileInput = document.getElementById('resume');
+            const files = fileInput.files;
+
+            if (files.length === 0) {
+                alert('Please select at least one file.');
+                return;
+            }
+
+            // Disable button and show loading state
+            button.disabled = true;
+            buttonText.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Uploading...';
+
+            const formData = new FormData(document.getElementById('uploadForm'));
+            for (let i = 0; i < files.length; i++) {
+                if (files[i].size > 5 * 1024 * 1024) { // 5MB limit
+                    alert(`File ${files[i].name} exceeds the size limit (5MB).`);
+                    button.disabled = false;
+                    buttonText.innerHTML = '<i class="fas fa-upload me-1"></i>Upload';
+                    return;
+                }
+                formData.append('resume', files[i]);
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/upload', true);
+
+            xhr.upload.onprogress = function (e) {
+                if (e.lengthComputable) {
+                    const percentComplete = (e.loaded / e.total) * 100;
+                    document.querySelector('.progress-bar').style.width = percentComplete + '%';
+                }
+            };
+
+            xhr.onload = function () {
+                button.disabled = false;
+                buttonText.innerHTML = '<i class="fas fa-upload me-1"></i>Upload';
+                
+                if (xhr.status === 200) {
+                    document.getElementById('uploadMessage').innerHTML = `
+                        <div class="alert alert-success mt-3" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>Resumes uploaded and parsed successfully! Page will refresh in 3 seconds...
+                        </div>
+                    `;
+                    // Refresh the page after 3 seconds to show the new resumes
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 3000);
+                } else {
+                    document.getElementById('uploadMessage').innerHTML = `
+                        <div class="alert alert-danger mt-3" role="alert">
+                            <i class="fas fa-exclamation-circle me-2"></i>Upload failed. Please try again.
+                        </div>
+                    `;
+                }
+            };
+
+            xhr.onerror = function () {
+                button.disabled = false;
+                buttonText.innerHTML = '<i class="fas fa-upload me-1"></i>Upload';
+                document.getElementById('uploadMessage').innerHTML = `
+                    <div class="alert alert-danger mt-3" role="alert">
+                        <i class="fas fa-exclamation-circle me-2"></i>An error occurred during upload. Please try again.
+                    </div>
+                `;
+            };
+
+            xhr.send(formData);
+            document.getElementById('progressBar').style.display = 'block';
+        });
+
+        // Select all checkbox functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            if (selectAllCheckbox) {
+                selectAllCheckbox.addEventListener('change', function() {
+                    const checkboxes = document.querySelectorAll('.resume-checkbox');
+                    checkboxes.forEach(checkbox => {
+                        checkbox.checked = this.checked;
+                    });
+                });
+            }
+
+            // Delete selected button
+            const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
+            if(deleteSelectedBtn) {
+                deleteSelectedBtn.addEventListener('click', function() {
+                    const selectedIds = Array.from(document.querySelectorAll('.resume-checkbox:checked'))
+                        .map(checkbox => checkbox.value);
+
+                    if (selectedIds.length === 0) {
+                        alert('Please select at least one resume to delete.');
+                        return;
+                    }
+
+                    if (confirm(`Are you sure you want to delete ${selectedIds.length} selected resume(s)? This action cannot be undone.`)) {
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = '/delete-selected-resumes';
+
+                        const referrerInput = document.createElement('input');
+                        referrerInput.type = 'hidden';
+                        referrerInput.name = 'referrer';
+                        referrerInput.value = window.location.href;
+                        form.appendChild(referrerInput);
+
+                        selectedIds.forEach(id => {
+                            const input = document.createElement('input');
+                            input.type = 'hidden';
+                            input.name = 'resume_ids';
+                            input.value = id;
+                            form.appendChild(input);
+                        });
+
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

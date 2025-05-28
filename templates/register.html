@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Parser Pro | Admin Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --emerald-1: #10B981;
+            --emerald-2: #050596;
+            --emerald-3: #80fd2d;
+            --emerald-light: #D1FAE5;
+            --emerald-accent: #6EE7B7;
+            --admin-red: #EF4444;
+            --dark: #1E293B;
+            --light: #F8FAFC;
+            --transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, 
+                          #064E3B 0%, 
+                          var(--emerald-3) 50%, 
+                          var(--emerald-1) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333; /* Changed from var(--dark) to a darker gray */
+        }
+        
+        .admin-reg-card {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h2 {
+            background: linear-gradient(90deg, var(--emerald-3), var(--emerald-1));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: #2c3e50; /* Changed from var(--emerald-3) to a dark blue-gray */
+            margin-bottom: 8px;
+        }
+        
+        .form-control {
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1px solid #E0E0E0;
+            transition: var(--transition);
+            background-color: var(--light);
+            color: #333; /* Added text color for input fields */
+        }
+        
+        .form-control::placeholder {
+            color: #95a5a6; /* Changed placeholder text color */
+        }
+        
+        .form-control:focus {
+            border-color: var(--emerald-accent);
+            box-shadow: 0 0 0 0.25rem rgba(16, 185, 129, 0.25);
+        }
+        
+        .btn-admin-reg {
+            background: linear-gradient(90deg, var(--emerald-2), var(--emerald-3));
+            border: none;
+            padding: 14px;
+            font-weight: 500;
+            letter-spacing: 0.8px;
+            transition: var(--transition);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-admin-reg:hover {
+            background: linear-gradient(90deg, var(--emerald-1), var(--emerald-2));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-admin-reg:active {
+            transform: translateY(0);
+        }
+        
+        .btn-admin-reg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                          transparent, 
+                          rgba(255,255,255,0.3), 
+                          transparent);
+            transition: 0.6s;
+        }
+        
+        .btn-admin-reg:hover::after {
+            left: 100%;
+        }
+        
+        .alert {
+            border-radius: 10px;
+            border-left: 4px solid;
+        }
+        
+        .alert-success {
+            border-color: var(--emerald-2);
+            background-color: var(--emerald-light);
+            color: var(--emerald-3);
+        }
+        
+        .alert-danger {
+            border-color: var(--admin-red);
+            background-color: #FEE2E2;
+            color: var(--admin-red);
+        }
+        
+        .link-admin {
+            color: #2980b9; /* Changed from var(--emerald-2) to a blue color */
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .link-admin:hover {
+            color: #3498db; /* Changed hover color to a lighter blue */
+        }
+        
+        .link-admin::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--emerald-accent);
+            transition: var(--transition);
+        }
+        
+        .link-admin:hover::after {
+            width: 100%;
+        }
+        
+        .pulse-emerald {
+            animation: pulseEmerald 2s infinite;
+        }
+        
+        @keyframes pulseEmerald {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        
+        p.text-center {
+            color: #555; /* Changed the "Already authorized?" text color */
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-reg-card">
+        <h2>Admin Registration</h2>
+        
+        <form action="/register" method="post">
+            <div class="mb-4">
+                <label for="username" class="form-label">Admin ID</label>
+                <input type="text" class="form-control" name="username" id="username" required placeholder="Create admin username">
+            </div>
+            <div class="mb-4">
+                <label for="email" class="form-label">Institutional Email</label>
+                <input type="email" class="form-control" name="email" id="email" required placeholder="Your organization email">
+            </div>
+            <div class="mb-4">
+                <label for="password" class="form-label">Security Key</label>
+                <input type="password" class="form-control" name="password" id="password" required placeholder="Create strong password">
+            </div>
+            <button type="submit" class="btn btn-admin-reg w-100 pulse-emerald">Register Admin</button>
+        </form>
+        
+        <p class="mt-4 text-center">Already authorized? 
+            <a href="/adminlogin" class="link-admin">Access Admin Portal</a>
+        </p>
+    </div>
+
+    <script>
+        // Enhanced input focus effects
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.querySelector('.form-label').style.color = 'var(--emerald-1)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.querySelector('.form-label').style.color = '#2c3e50'; /* Changed to match the new form-label color */
+            });
+        });
+    </script>
+</body>
+</html>

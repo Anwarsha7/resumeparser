@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Parser Pro | User Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --emerald-1: #10B981;
+            --emerald-2: #059669;
+            --emerald-3: #047857;
+            --emerald-light: #D1FAE5;
+            --emerald-accent: #6EE7B7;
+            --error-red: #EF4444;
+            --dark: #1E293B;
+            --light: #F8FAFC;
+            --transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, 
+                          #064E3B 0%, 
+                          var(--emerald-3) 50%, 
+                          var(--emerald-1) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--dark);
+        }
+        
+        .user-reg-card {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h2 {
+            background: linear-gradient(90deg, var(--emerald-3), var(--emerald-1));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: var(--emerald-3);
+            margin-bottom: 8px;
+        }
+        
+        .form-control {
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1px solid #E0E0E0;
+            transition: var(--transition);
+            background-color: var(--light);
+        }
+        
+        .form-control:focus {
+            border-color: var(--emerald-accent);
+            box-shadow: 0 0 0 0.25rem rgba(16, 185, 129, 0.25);
+        }
+        
+        .btn-user-reg {
+            background: linear-gradient(90deg, var(--emerald-2), var(--emerald-3));
+            border: none;
+            padding: 14px;
+            font-weight: 500;
+            letter-spacing: 0.8px;
+            transition: var(--transition);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-user-reg:hover {
+            background: linear-gradient(90deg, var(--emerald-1), var(--emerald-2));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-user-reg:active {
+            transform: translateY(0);
+        }
+        
+        .btn-user-reg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                          transparent, 
+                          rgba(255,255,255,0.3), 
+                          transparent);
+            transition: 0.6s;
+        }
+        
+        .btn-user-reg:hover::after {
+            left: 100%;
+        }
+        
+        .link-user {
+            color: var(--emerald-2);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .link-user:hover {
+            color: var(--emerald-3);
+        }
+        
+        .link-user::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--emerald-accent);
+            transition: var(--transition);
+        }
+        
+        .link-user:hover::after {
+            width: 100%;
+        }
+        
+        .pulse-emerald {
+            animation: pulseEmerald 2s infinite;
+        }
+        
+        @keyframes pulseEmerald {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        
+        .user-options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+        
+        .btn-outline-user {
+            border-color: var(--emerald-2);
+            color: var(--emerald-2);
+            transition: var(--transition);
+        }
+        
+        .btn-outline-user:hover {
+            background: var(--emerald-2);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="user-reg-card">
+        <h2>Create Account</h2>
+        
+        <form action="/userregister" method="post">
+            <div class="mb-4">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" id="username" required placeholder="Choose your username">
+            </div>
+            <div class="mb-4">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" name="email" id="email" required placeholder="your.email@example.com">
+            </div>
+            <div class="mb-4">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="password" required placeholder="Create secure password">
+            </div>
+            <button type="submit" class="btn btn-user-reg w-100 pulse-emerald">Register Now</button>
+        </form>
+        
+        <p class="mt-4 text-center">Already have an account? 
+            <a href="/userlogin" class="link-user">Sign In Here</a>
+        </p>
+
+        <div class="user-options">
+            <a href="{{ url_for('index') }}" class="btn btn-outline-user">
+                ← Back to Home
+            </a>
+            <a href="/userlogin" class="btn btn-outline-user">
+                Existing User →
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced input focus effects
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.querySelector('.form-label').style.color = 'var(--emerald-1)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.querySelector('.form-label').style.color = 'var(--emerald-3)';
+            });
+        });
+    </script>
+</body>
+</html>
