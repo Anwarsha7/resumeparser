@@ -23,7 +23,7 @@ A sophisticated resume parsing web application that automatically extracts and s
 
 ## 🖥️ User Interface Preview
 
-![Resume Management Dashboard](images/dashboard.png)
+![Resume Management Dashboard](images/image.png)
 
 *The dashboard allows you to:*
 - Sort resumes by experience, education, or relevance
