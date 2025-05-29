@@ -59,30 +59,58 @@ A sophisticated resume parsing web application that automatically extracts and s
 
 ---
 
-## 🏗️ Project Structure
+🏗️ Project Structure
+<pre> . ├── app.py # Flask application entry point ├── requirements.txt # Python dependencies ├── Procfile # Render deployment configuration ├── .env # Environment variables ├── .gitignore # Git exclusion rules ├── resume_parser.log # Application logs ├── res/ # Core parsing modules │ ├── ress.py # Main parsing logic │ └── resu.py # Utility functions ├── static/ # Static assets │ ├── css/ # Stylesheets │ └── js/ # JavaScript files └── templates/ # HTML templates ├── index.html # Main interface └── results.html # Parsing results display </pre>
 
-```bash
-.
-├── app.py                  # Flask application entry point
-├── requirements.txt        # Python dependencies
-├── Procfile                # Render deployment configuration
-├── .env                    # Environment variables
-├── .gitignore              # Git exclusion rules
-├── resume_parser.log       # Application logs
-├── res/                    # Core parsing modules
-│   ├── ress.py             # Main parsing logic
-│   └── resu.py             # Utility functions
-├── static/                 # Static assets
-│   ├── css/                # Stylesheets
-│   └── js/                 # JavaScript files
-└── templates/              # HTML templates
-    ├── index.html          # Main interface
-    └── results.html        # Parsing results display
 
- 
-Access the app at: http://localhost:5000
+⚙️ Installation
+To run this application locally:
+
+1. Clone the repository
+bash
+Copy
+Edit
+git clone https://github.com/Anwarsha7/resumeparser.git
+2. Navigate to the project directory
+bash
+Copy
+Edit
+cd resumeparser
+3. Create a virtual environment
+bash
+Copy
+Edit
+python -m venv venv
+4. Activate the virtual environment
+On macOS/Linux:
+
+bash
+Copy
+Edit
+source venv/bin/activate
+On Windows:
+
+bash
+Copy
+Edit
+venv\Scripts\activate
+5. Install dependencies
+bash
+Copy
+Edit
+pip install -r requirements.txt
+6. Download NLP models
+bash
+Copy
+Edit
+python -m spacy download en_core_web_sm
+python -m nltk.downloader punkt words
+7. Run the application
+bash
+Copy
+Edit
+python app.py
+Now, visit http://localhost:5000 in your browser.
 
 📜 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-<div align="center"> Built with ❤️ by <a href="https://github.com/Anwarsha7">Anwar Sha</a> </div> ```
+This project is licensed under the MIT License — see the LICENSE file for details.
