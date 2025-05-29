@@ -252,6 +252,6 @@ You can also find more information about the MIT License at [https://opensource.
 
 ## 📧 Contact
 
-Anwarsha K - [@Anwarsha7](https://github.com/Anwarsha7) - ynetflix894@gmail.com
+Anwarsha K S - [@Anwarsha7](https://github.com/Anwarsha7) - ynetflix894@gmail.com
 
 Project Link: [https://github.com/Anwarsha7/resumeparser](https://github.com/Anwarsha7/resumeparser)
