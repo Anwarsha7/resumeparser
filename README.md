@@ -69,7 +69,7 @@ A sophisticated resume parsing web application that automatically extracts and s
     ├── index.html         # Main interface
     └── results.html       # Parsing results display
 
-🛠️ Installation Guide
+## 🛠️ Installation Guide
 bash
 # 1. Clone the repository
 git clone https://github.com/Anwarsha7/resumeparser.git
