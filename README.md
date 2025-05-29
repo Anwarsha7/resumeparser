@@ -60,33 +60,95 @@ A sophisticated resume parsing web application that automatically extracts and s
 ---
 
  
-🛠️ Installation Guide
-Step 1: Clone the repository
+## Installation
+
+To run this application locally:
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/Anwarsha7/resumeparser.git
+Navigate to the project directory:
+
 bash
-git clone https://github.com/Anwarsha7/resumeparser.git
+Copy
+Edit
 cd resumeparser
-Step 2: Create virtual environment
+Create virtual environment:
+
 bash
+Copy
+Edit
 python -m venv venv
-Activate it:
+Activate environment:
+
+On Windows:
 
 bash
-# Windows:
+Copy
+Edit
 venv\Scripts\activate
+On macOS/Linux:
 
-# macOS/Linux:
+bash
+Copy
+Edit
 source venv/bin/activate
-Step 3: Install dependencies
+Install dependencies:
+
 bash
+Copy
+Edit
 pip install -r requirements.txt
-Step 4: Download NLP models
+Download NLP models:
+
 bash
+Copy
+Edit
 python -m spacy download en_core_web_sm
 python -m nltk.downloader punkt words
-Step 5: Run the application
+Run the application:
+
 bash
+Copy
+Edit
 python app.py
-→ Access at: http://localhost:5000
+The application will be accessible at http://localhost:5000.
+
+Deployment
+This application is deployed using Render, a cloud application platform that simplifies the process of building, deploying, and scaling apps.
+
+Contributing
+We welcome contributions! Please follow these steps:
+
+Fork the repository.
+
+Create a new branch:
+
+bash
+Copy
+Edit
+git checkout -b feature-name
+Make your changes.
+
+Commit your changes:
+
+bash
+Copy
+Edit
+git commit -m 'Add feature'
+Push to the branch:
+
+bash
+Copy
+Edit
+git push origin feature-name
+Open a Pull Request.
+
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+<div align="center"> <sub>Built with ❤️ by <a href="https://github.com/Anwarsha7">Anwar Sha</a></sub> </div> ```
 
 📜 License
 This project is licensed under the MIT License.
