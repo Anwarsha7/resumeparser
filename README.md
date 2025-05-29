@@ -59,42 +59,35 @@ A sophisticated resume parsing web application that automatically extracts and s
 
 ---
 
-⚙️ Installation
-To run this application locally:
-
-1. Clone the repository
  
+🛠️ Installation Guide
+Step 1: Clone the repository
+bash
 git clone https://github.com/Anwarsha7/resumeparser.git
-2. Navigate to the project directory
- 
 cd resumeparser
-3. Create a virtual environment
- 
+Step 2: Create virtual environment
+bash
 python -m venv venv
-4. Activate the virtual environment
-On macOS/Linux:
+Activate it:
 
- 
-source venv/bin/activate
-On Windows:
-
- 
+bash
+# Windows:
 venv\Scripts\activate
-5. Install dependencies
- 
+
+# macOS/Linux:
+source venv/bin/activate
+Step 3: Install dependencies
+bash
 pip install -r requirements.txt
-6. Download NLP models
- 
+Step 4: Download NLP models
+bash
 python -m spacy download en_core_web_sm
 python -m nltk.downloader punkt words
-7. Run the application
- 
+Step 5: Run the application
+bash
 python app.py
-Now open your browser and go to:
-
-http://localhost:5000
-
+→ Access at: http://localhost:5000
 
 📜 License
 This project is licensed under the MIT License.
-See the LICENSE file for full license text.
+Copyright © 2023 Anwar Sha
