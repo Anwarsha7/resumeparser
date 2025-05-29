@@ -59,17 +59,38 @@ A sophisticated resume parsing web application that automatically extracts and s
 
 ---
 
-🏗️ Project Structure
-<pre> . ├── app.py # Flask application entry point ├── requirements.txt # Python dependencies ├── Procfile # Render deployment configuration ├── .env # Environment variables ├── .gitignore # Git exclusion rules ├── resume_parser.log # Application logs ├── res/ # Core parsing modules │ ├── ress.py # Main parsing logic │ └── resu.py # Utility functions ├── static/ # Static assets │ ├── css/ # Stylesheets │ └── js/ # JavaScript files └── templates/ # HTML templates ├── index.html # Main interface └── results.html # Parsing results display </pre>
+## 🏗️ Project Structure
 
+.
+├── app.py # Flask application entry point
+├── requirements.txt # Python dependencies
+├── Procfile # Render deployment configuration
+├── .env # Environment variables
+├── .gitignore # Git exclusion rules
+├── resume_parser.log # Application logs
+├── res/ # Core parsing modules
+│ ├── ress.py # Main parsing logic
+│ └── resu.py # Utility functions
+├── static/ # Static assets
+│ ├── css/ # Stylesheets
+│ └── js/ # JavaScript files
+└── templates/ # HTML templates
+├── index.html # Main interface
+└── results.html # Parsing results display
 
-⚙️ Installation
-To run this application locally:
-
-1. Clone the repository
-bash
+yaml
 Copy
 Edit
+
+---
+
+## ⚙️ Installation
+
+To run this application locally:
+
+### 1. Clone the repository
+
+```bash
 git clone https://github.com/Anwarsha7/resumeparser.git
 2. Navigate to the project directory
 bash
