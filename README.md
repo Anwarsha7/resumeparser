@@ -1,4 +1,4 @@
- # 📄 ResumeParser - AI-Powered Resume Extraction Tool
+# 📄 ResumeParser - AI-Powered Resume Extraction & Management Tool
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python)
 ![Flask](https://img.shields.io/badge/Flask-2.3-green?logo=flask)
@@ -7,7 +7,7 @@
 ![Render](https://img.shields.io/badge/Hosted%20on-Render-46B3E6?logo=render)
 ![MIT License](https://img.shields.io/badge/License-MIT-yellow)
 
-A sophisticated resume parsing web application that automatically extracts and structures key information from resumes using advanced NLP techniques. Effortlessly transform unstructured resume data into actionable insights!
+A sophisticated resume parsing web application designed for both **Candidates** and **Recruiters**. Candidates can easily upload their resumes, while Recruiters can manage, download, parse, and analyze these resumes using advanced NLP techniques to extract and structure key information. Effortlessly transform unstructured resume data into actionable insights!
 
 🌐 **Live Demo**: [https://resumeparser-9x3c.onrender.com](https://resumeparser-9x3c.onrender.com)
 
@@ -16,12 +16,15 @@ A sophisticated resume parsing web application that automatically extracts and s
 ## 📝 Table of Contents
 
 - [About The Project](#-about-the-project)
+- [👥 User Roles & Workflow](#-user-roles--workflow)
+  - [For Candidates](#-for-candidates)
+  - [For Recruiters](#-for-recruiters)
 - [✨ Key Features](#-key-features)
-- [⚙️ How It Works](#️-how-it-works)
+- [⚙️ Core Parsing Engine - How It Works](#️-core-parsing-engine---how-it-works)
 - [🖥️ User Interface Preview](#️-user-interface-preview)
 - [🚀 Tech Stack](#-tech-stack)
 - [🛠️ Installation](#️-installation)
-- [▶️ Usage](#️-usage)
+- [▶️ Usage Instructions](#️-usage-instructions)
 - [🤝 Contributing](#-contributing)
 - [📜 License](#-license)
 - [📧 Contact](#-contact)
@@ -30,76 +33,108 @@ A sophisticated resume parsing web application that automatically extracts and s
 
 ## 🎯 About The Project
 
-ResumeParser streamlines the hiring process by automating the tedious task of sifting through resumes. By leveraging Natural Language Processing (NLP), this tool intelligently extracts crucial information from PDF resumes, presenting it in a structured and easily manageable format. This allows recruiters and hiring managers to quickly identify candidate qualifications and make informed decisions.
+ResumeParser streamlines the hiring process by providing a dedicated platform for candidates to submit their resumes and for recruiters to efficiently process them. By leveraging Natural Language Processing (NLP), this tool intelligently extracts crucial information from PDF resumes, presenting it in a structured and easily manageable format. This allows recruiters to quickly identify candidate qualifications and make informed decisions, while providing a simple submission portal for candidates.
+
+---
+
+## 👥 User Roles & Workflow
+
+ResumeParser offers distinct functionalities tailored to two primary user roles:
+
+### 👤 For Candidates
+1.  **Register/Login**: Candidates create an account or log in securely.
+2.  **Resume Upload**: Upon logging in, candidates are directed to a page where they can easily upload their resume (PDF format).
+3.  **Submission Confirmation**: Candidates receive confirmation of their resume submission.
+
+### 👨‍💼 For Recruiters
+1.  **Register/Login**: Recruiters create an account or log in securely to access the admin dashboard.
+2.  **Admin Dashboard**: Recruiters land on a dashboard where they can view and manage resumes.
+3.  **Download Resumes**: Recruiters can download all resumes uploaded by candidates.
+4.  **Navigate to Parser**: After downloading, recruiters can navigate to the parsing section of the application.
+5.  **Parse Resumes**: Recruiters upload the downloaded (or any other) PDF resumes one by one into the parsing engine.
+6.  **View & Analyze Parsed Data**: The system extracts key information (personal details, skills, experience, education).
+7.  **Sort & Filter**: Recruiters can sort the parsed resume data based on various criteria (e.g., experience, education) to efficiently find suitable candidates.
 
 ---
 
 ## ✨ Key Features
 
-### 🔍 Smart Information Extraction
--   👤 **Personal Details**: Name, Email, Phone Number, LinkedIn Profile (if available)
--   📝 **Professional Summary**: Career objectives and key qualifications
--   🛠️ **Skills**: Technical and soft skills, with proficiency detection (e.g., "Expert in Python")
--   🏢 **Experience**: Company names, job titles, employment durations, and key responsibilities/achievements
--   🎓 **Education**: Degrees, institutions, fields of study, and graduation years
--   📜 **Certifications**: Professional certifications and licenses
+### For All Users:
+-   🔐 **Secure Authentication**: Separate registration and login for candidates and recruiters.
 
-### Other Notable Features:
--   📄 **PDF Support**: Handles resumes in PDF format.
--   📊 **Structured Output**: Presents parsed data in an organized table.
--   🚀 **User-Friendly Interface**: Simple and intuitive web interface for easy uploads and viewing.
+### For Candidates:
+-   ⬆️ **Simple Resume Upload**: Dedicated interface for easy PDF resume submission.
+
+### For Recruiters:
+-   📊 **Admin Dashboard**: Centralized view for managing candidate resumes.
+-   📥 **Bulk Resume Access**: Ability to download all submitted candidate resumes.
+-   🔍 **Smart Information Extraction (via Parsing Engine)**:
+    -   **Personal Details**: Name, Email, Phone Number, LinkedIn Profile (if available).
+    -   **Professional Summary**: Career objectives and key qualifications.
+    -   **Skills**: Technical and soft skills.
+    -   **Experience**: Company names, job titles, durations, and key responsibilities.
+    -   **Education**: Degrees, institutions, and graduation years.
+    -   **Certifications**: Professional certifications and licenses.
+-   📋 **Structured Data Output**: Parsed information presented in an organized, tabular format.
+-   ⚙️ **Advanced Sorting**: Ability to sort parsed resumes based on extracted criteria.
+-   📄 **PDF Support**: Handles resumes in PDF format for parsing.
 -   ☁️ **Cloud Hosted**: Accessible anywhere via the Render deployment.
 
 ---
 
-## ⚙️ How It Works
+## ⚙️ Core Parsing Engine - How It Works
 
-The application follows a streamlined process to extract information:
+The resume parsing functionality used by recruiters involves the following steps:
 
-1.  **📄 Resume Upload**: Users upload resumes in PDF format through the web interface.
+1.  **📄 Resume Upload (by Recruiter for Parsing)**: Recruiters upload individual PDF resumes (typically those downloaded from the candidate pool) into the parsing interface.
 2.  **⛏️ Text Extraction**: `pdfminer.six` is used to accurately extract raw text content from the PDF files.
 3.  **🧠 NLP Processing**:
     *   **spaCy**: Utilized for Named Entity Recognition (NER) to identify entities like names, organizations, dates, and locations. It also helps with sentence segmentation and tokenization.
-    *   **NLTK**: Employed for tasks like part-of-speech (POS) tagging, and accessing lexical resources (e.g., `punkt` for tokenization, `words` for vocabulary checks).
-    *   **Custom Regex**: Regular expressions are used to identify specific patterns like email addresses, phone numbers, and other structured data points that might be missed or need refinement.
-4.  **🏗️ Data Structuring**: The extracted information is categorized and organized into predefined fields (Name, Email, Skills, Experience, etc.).
-5.  **💻 Display**: The structured data is then presented to the user in a clear, tabular format on the web application's dashboard.
+    *   **NLTK**: Employed for tasks like part-of-speech (POS) tagging, and accessing lexical resources (e.g., `punkt` for tokenization, `words` for vocabulary checks, `stopwords` for noise reduction).
+    *   **Custom Regex**: Regular expressions are used to identify specific patterns like email addresses, phone numbers, and other structured data points.
+4.  **🏗️ Data Structuring**: The extracted information is categorized and organized into predefined fields.
+5.  **💻 Display & Sorting**: The structured data is then presented to the recruiter in a clear, sortable table.
 
 ---
 
 ## 🖥️ User Interface Preview
 
-![Resume Management Dashboard](images/image.png)
+*   **Candidate View**: Candidates are presented with a straightforward login/registration page, leading to a dedicated resume upload interface.
+*   **Recruiter Admin Dashboard**: Recruiters have access to a dashboard to view and download candidate resumes.
+*   **Recruiter Parsing View & Results**: After navigating to the parsing section, recruiters can upload resumes for extraction. The parsed data is displayed in a structured table, similar to the image below, allowing for sorting and analysis.
 
-*The dashboard allows you to:*
-- Upload new resumes for parsing.
-- View all parsed information in a structured table.
-- Sort resumes by experience, education, or relevance (future enhancement idea!).
-- Perform bulk actions on multiple resumes (future enhancement idea!).
-- Download or delete individual records.
+![Resume Management Dashboard for Parsed Data](images/image.png)
+*(This image primarily showcases the recruiter's view after parsing a resume, where data is structured and sortable.)*
 
 
 ---
+
+ 
 
 ## 🚀 Tech Stack
 
 ### Frontend
 
-| Technology      | Purpose      |
-|-----------------|--------------|
-| HTML5           | Structure    |
-| CSS3/Bootstrap  | Styling      |
-| Jinja2          | Templating   |
+| Technology      | Purpose         |
+|-----------------|-----------------|
+| HTML5           | Structure       |
+| CSS3/Bootstrap  | Styling         |
+| Jinja2          | Templating      |
 
 ### Backend
 
-| Technology      | Purpose             |
-|-----------------|---------------------|
-| Python 3.8+     | Core language        |
-| Flask           | Web framework        |
-| pdfminer.six    | PDF text extraction  |
-| spaCy/NLTK      | NLP processing       |
-| Regex           | Pattern matching     |
+| Technology      | Purpose                |
+|-----------------|------------------------|
+| Python 3.8+     | Core language           |
+| Flask           | Web framework, Routing |
+| **MongoDB Atlas** | Cloud Database Service |
+| **Pymongo**     | MongoDB Python Driver  |
+| pdfminer.six    | PDF text extraction     |
+| spaCy/NLTK      | NLP processing          |
+| Regex           | Pattern matching        |
+| Werkzeug        | User Authentication (if used directly) |
+
+*(Note: Pymongo is the standard Python driver for MongoDB. Please ensure it's in your `requirements.txt` if you're using MongoDB Atlas from Python.)*
 
 ### Deployment
 | Service         | Purpose             |
@@ -123,7 +158,6 @@ To run this application locally, follow these steps:
     ```
 
 3.  **Create and activate a virtual environment:**
-
     *   Create:
         ```bash
         python -m venv venv
@@ -142,32 +176,53 @@ To run this application locally, follow these steps:
     ```bash
     pip install -r requirements.txt
     ```
+    *(Ensure your `requirements.txt` includes `pymongo` and all other necessary packages).*
 
-5.  **Download NLP models:**
+5.  **Configure Environment Variables (MongoDB Atlas Connection):**
+    This application requires a connection string to your MongoDB Atlas cluster. It's best practice to store this in an environment variable.
+    *   Create a `.env` file in the root of your project (ensure `.env` is listed in your `.gitignore` file to avoid committing credentials).
+    *   Add your MongoDB Atlas connection string to the `.env` file, for example:
+        ```env
+        MONGODB_URI="mongodb+srv://<username>:<password>@<cluster-url>/<database-name>?retryWrites=true&w=majority"
+        ```
+    *   Replace `<username>`, `<password>`, `<cluster-url>`, and `<database-name>` with your actual credentials and database details.
+    *   Your application code (e.g., in `app.py`) should be configured to read this environment variable (e.g., using `os.getenv('MONGODB_URI')` or a library like `python-dotenv`).
+
+6.  **Download NLP models:**
     ```bash
     python -m spacy download en_core_web_sm
     python -m nltk.downloader punkt words stopwords
     ```
-    *(Added `stopwords` as it's commonly used with NLTK for text processing)*
 
-6.  **Run the application:**
+7.  **Run the application:**
     ```bash
     python app.py
     ```
 
 The application will be accessible at: `http://localhost:5000`
 
+ 
 ---
 
-## ▶️ Usage
+## ▶️ Usage Instructions
 
-Once the application is running locally:
+Once the application is running locally or accessed via the live demo link:
 
-1.  Open your web browser and navigate to `http://localhost:5000`.
-2.  You will see the main page with an option to upload a resume.
-3.  Click on "Choose File", select a PDF resume from your local machine, and click "Upload".
-4.  The application will process the resume and display the extracted information in a structured format on the dashboard.
-5.  You can then view the details or upload another resume.
+### For Candidates:
+1.  Navigate to `http://localhost:5000` (or the live demo link).
+2.  Register for a new candidate account or log in if you already have one.
+3.  You will be directed to the resume upload page.
+4.  Click "Choose File", select your PDF resume, and click "Upload".
+
+### For Recruiters:
+1.  Navigate to `http://localhost:5000` (or the live demo link).
+2.  Register for a new recruiter account or log in.
+3.  You will be directed to the admin dashboard where you can see candidate resumes.
+4.  Download the resumes you wish to process.
+5.  Navigate to the "Resume Parser" section/page (the main index page as you described).
+6.  Upload a downloaded (or any other) PDF resume for parsing.
+7.  View the extracted information.
+8.  Utilize the sorting features to analyze and compare candidate data.
 
 ---
 
@@ -188,13 +243,15 @@ Don't forget to give the project a star! Thanks again!
 
 ## 📜 License
 
-Distributed under the MIT License. See `LICENSE` file for more information.
- 
+This project is licensed under the MIT License.
+
+See the [LICENSE](LICENSE) file for full license rights and limitations.
+You can also find more information about the MIT License at [https://opensource.org/licenses/MIT](https://opensource.org/licenses/MIT).
 
 ---
 
 ## 📧 Contact
 
-Anwarsha K - [@Anwarsha7](https://github.com/Anwarsha7) - ynetfli894@gmail.com  
+Anwarsha K - [@Anwarsha7](https://github.com/Anwarsha7) - ynetflix894@gmail.com
 
 Project Link: [https://github.com/Anwarsha7/resumeparser](https://github.com/Anwarsha7/resumeparser)
