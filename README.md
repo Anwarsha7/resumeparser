@@ -79,60 +79,7 @@ A sophisticated resume parsing web application that automatically extracts and s
     ├── index.html          # Main interface
     └── results.html        # Parsing results display
 
-⚙️ Installation
-To run this application locally:
-
-Clone the repository:
-
-bash
-Copy
-Edit
-git clone https://github.com/Anwarsha7/resumeparser.git
-Navigate to the project directory:
-
-bash
-Copy
-Edit
-cd resumeparser
-Create a virtual environment:
-
-bash
-Copy
-Edit
-python -m venv venv
-Activate the virtual environment:
-
-On macOS/Linux:
-
-bash
-Copy
-Edit
-source venv/bin/activate
-On Windows:
-
-bash
-Copy
-Edit
-venv\Scripts\activate
-Install dependencies:
-
-bash
-Copy
-Edit
-pip install -r requirements.txt
-Download NLP models:
-
-bash
-Copy
-Edit
-python -m spacy download en_core_web_sm
-python -m nltk.downloader punkt words
-Run the application:
-
-bash
-Copy
-Edit
-python app.py
+ 
 Access the app at: http://localhost:5000
 
 📜 License
