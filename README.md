@@ -11,6 +11,8 @@ A sophisticated resume parsing web application that automatically extracts and s
 
 🌐 **Live Demo**: [https://resumeparser-9x3c.onrender.com](https://resumeparser-9x3c.onrender.com)
 
+---
+
 ## ✨ Key Features
 
 ### 🔍 Smart Information Extraction
@@ -20,6 +22,8 @@ A sophisticated resume parsing web application that automatically extracts and s
 - **Experience**: Company names, job titles, durations, and responsibilities
 - **Education**: Degrees, institutions, and graduation years
 - **Certifications**: Professional certifications and licenses
+
+---
 
 ## 🖥️ User Interface Preview
 
@@ -31,23 +35,29 @@ A sophisticated resume parsing web application that automatically extracts and s
 - View all parsed information in a structured table
 - Download or delete individual records
 
+---
+
 ## 🚀 Tech Stack
 
 ### Frontend
-| Technology | Purpose |
-|------------|---------|
-| HTML5 | Structure |
-| CSS3/Bootstrap | Styling |
-| Jinja2 | Templating |
+
+| Technology      | Purpose      |
+|-----------------|--------------|
+| HTML5           | Structure    |
+| CSS3/Bootstrap  | Styling      |
+| Jinja2          | Templating   |
 
 ### Backend
-| Technology | Purpose |
-|------------|---------|
-| Python 3.8+ | Core language |
-| Flask | Web framework |
-| pdfminer.six | PDF text extraction |
-| spaCy/NLTK | NLP processing |
-| Regex | Pattern matching |
+
+| Technology      | Purpose             |
+|-----------------|---------------------|
+| Python 3.8+     | Core language        |
+| Flask           | Web framework        |
+| pdfminer.six    | PDF text extraction  |
+| spaCy/NLTK      | NLP processing       |
+| Regex           | Pattern matching     |
+
+---
 
 ## 🏗️ Project Structure
 
@@ -55,22 +65,23 @@ A sophisticated resume parsing web application that automatically extracts and s
 .
 ├── app.py                  # Flask application entry point
 ├── requirements.txt        # Python dependencies
-├── Procfile               # Render deployment configuration
-├── .env                   # Environment variables
-├── .gitignore             # Git exclusion rules
-├── resume_parser.log      # Application logs
-├── res/                   # Core parsing modules
-│   ├── ress.py            # Main parsing logic
-│   └── resu.py            # Utility functions
-├── static/                # Static assets
-│   ├── css/               # Stylesheets
-│   └── js/                # JavaScript files
-└── templates/             # HTML templates
-    ├── index.html         # Main interface
-    └── results.html       # Parsing results display
-
-## 🛠️ Installation Guide
+├── Procfile                # Render deployment configuration
+├── .env                    # Environment variables
+├── .gitignore              # Git exclusion rules
+├── resume_parser.log       # Application logs
+├── res/                    # Core parsing modules
+│   ├── ress.py             # Main parsing logic
+│   └── resu.py             # Utility functions
+├── static/                 # Static assets
+│   ├── css/                # Stylesheets
+│   └── js/                 # JavaScript files
+└── templates/              # HTML templates
+    ├── index.html          # Main interface
+    └── results.html        # Parsing results display
+⚙️ Installation & Setup
 bash
+Copy
+Edit
 # 1. Clone the repository
 git clone https://github.com/Anwarsha7/resumeparser.git
 cd resumeparser
