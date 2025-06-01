@@ -1,11 +1,11 @@
 # 📄 ResumeParser - AI-Powered Resume Extraction & Management Tool
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python)
-![Flask](https://img.shields.io/badge/Flask-2.3-green?logo=flask)
-![NLTK](https://img.shields.io/badge/NLTK-3.8.1-orange)
-![spaCy](https://img.shields.io/badge/spaCy-3.7-red)
-![Render](https://img.shields.io/badge/Hosted%20on-Render-46B3E6?logo=render)
-![MIT License](https://img.shields.io/badge/License-MIT-yellow)
+[![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-2.3-green?logo=flask)](https://flask.palletsprojects.com/)
+[![NLTK](https://img.shields.io/badge/NLTK-3.8.1-orange)](https://www.nltk.org/)
+[![spaCy](https://img.shields.io/badge/spaCy-3.7-red)](https://spacy.io/)
+[![Render](https://img.shields.io/badge/Hosted%20on-Render-46B3E6?logo=render)](https://resumeparser-9x3c.onrender.com)
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow)](https://github.com/Anwarsha7/resumeparser/blob/main/LICENSE)
 
 A sophisticated resume parsing web application designed for both **Candidates** and **Recruiters**. Candidates can easily upload their resumes, while Recruiters can manage, download, parse, and analyze these resumes using advanced NLP techniques to extract and structure key information. Effortlessly transform unstructured resume data into actionable insights!
 
