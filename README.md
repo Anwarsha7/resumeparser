@@ -134,7 +134,6 @@ The resume parsing functionality used by recruiters involves the following steps
 | Regex           | Pattern matching        |
 | Werkzeug        | User Authentication (if used directly) |
 
-*(Note: Pymongo is the standard Python driver for MongoDB. Please ensure it's in your `requirements.txt` if you're using MongoDB Atlas from Python.)*
 
 ### Deployment
 | Service         | Purpose             |
